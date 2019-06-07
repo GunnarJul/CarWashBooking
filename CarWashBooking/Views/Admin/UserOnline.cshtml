@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewData["Title"] = "UserOnline";
+}
+
+<h1>Brugere logget på lige ny</h1>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/js/socket.js"></script>
+
+<div>
+
+    <div>
+        <label for="sendMessage">Send meddelelse:</label>
+        <input id="sendMessage" disabled />
+        <button id="sendButton" type="submit" disabled>Send</button>
+        @*<button id="closeButton" disabled>Close Socket</button>*@
+    </div>
+
+    <h2>Skriv med andre online brugere</h2>
+    <table style="width: 800px">
+        <thead>
+            <tr>
+                <td style="width: 100px;font:bold;">Bruger</td>
+                <td>Skiver</td>
+            </tr>
+        </thead>
+        <tbody id="commsLog"></tbody>
+    </table>
+</div>

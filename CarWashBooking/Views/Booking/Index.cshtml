@@ -1,0 +1,89 @@
+﻿@model CarWashBooking.ViewModels.NewBookingViewModel
+
+@{
+    ViewData["Title"] = "Booking";
+}
+
+<h2>Book en vask</h2>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Booking">
+            <script src="~/lib/jquery/dist/jquery.min.js"></script>
+            <script src="~/js/socket.js"></script>
+
+            <script>
+                var currenUserName="";
+                $(document).ready(function () {
+ 
+                    $("#SelectedCarWashID").on("change", function () {
+                        $.get('/Booking/ReadCarWash?selectedID=' + $(this).val(),
+                            function (data) {
+                                $("#partialDiv").html(data, status);
+                            });
+                    });
+                    try {
+                        var name =  "@Model.UserName";
+                        connect(name);
+                    } catch (err) {
+                        console.log(err);
+                    }
+                    
+                });
+            </script>
+
+            @*<div asp-validation-summary="ModelOnly" class="text-danger"></div>*@
+
+            <div class="form-group">
+                
+                <p> Du er logget ind som @Model.UserName   </p>
+
+                <label asp-for="SelectedCarWashID" class="control-label"></label>
+                <select asp-for="SelectedCarWashID" asp-items="@(new SelectList(Model.CarWashes, "ID", "Name"))" class="form-control"></select>
+                <div id="partialDiv">
+                    <partial name="_CarWashPartial" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="SelectedDate" class="control-label"></label>
+                <input type="date" asp-for="SelectedDate" class="form-control" asp-format="{0:yyyy-MM-dd}" />
+
+            </div>
+
+            <div class="form-group">
+                <label  class="control-label">Vælg klokkeslæt</label><br />
+                @{
+                    var listItems = new List<SelectListItem>();
+
+                    foreach (int key in Model.AvailibleTimes.Keys)
+                    {
+
+                        bool selected = key == Model.SelectTime;
+                        if (selected)
+                        {
+                            listItems.Add(new SelectListItem { Text = Model.AvailibleTimes[key], Value = key.ToString(), Selected = true });
+                        }
+                        else
+                        {
+                            listItems.Add(new SelectListItem { Text = Model.AvailibleTimes[key], Value = key.ToString() });
+                        }
+                    }
+
+
+                }@Html.DropDownList("SelectTime", new SelectList(listItems, "Value", "Text"))
+
+            </div>
+
+            <div class="form-group">
+                <input asp-action="Reservation" type="submit" value="Book denne tid" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-controller="Home" asp-action="Index">Tilbage</a>
+</div>
+

@@ -1,0 +1,38 @@
+﻿@model CarWashBooking.ViewModels.CarWashViewModel
+@{
+    ViewData["Title"] = "Administration";
+}
+
+
+<form asp-action="Index" method="get">
+
+    <h2>Administration af VaskeHaller.</h2>
+    <div class="form-group">
+        <span>
+            Søg på navn <input id="Search" asp-for="Search"   type="text" />
+            <input id="SearchBtn" type="submit" asp-controller="Admin" asp-action="Search" asp-i value="Søg" autofocus />
+
+
+        </span>
+    </div>
+    <div class="form-group">
+        <input type="submit" asp-controller="Admin" asp-action="NewCarWash" value="Tilføj ny vaskehal" />
+    </div>
+    <div class="form-group" id="carListId">
+        @for (int index = 0; index < Model.CarWashes.Count; index++)
+        {
+
+            @*<vc:car-wash> </vc:car-wash> HVorfor viker dette ikke ???*@
+
+            @Html.ActionLink("Editer", "EditCarWash", new { id = @Model.CarWashes[index].ID })
+            <span> </span>
+
+            @Html.ActionLink("Slet", "DeleteCarWash", new { id = @Model.CarWashes[index].ID }, new { onclick = "return confirm('Bekræft sletning?');" })
+
+            @await Component.InvokeAsync("CarWash", @Model.CarWashes[index])
+
+
+        }
+    </div>
+
+</form>

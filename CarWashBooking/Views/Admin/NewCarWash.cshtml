@@ -1,0 +1,45 @@
+﻿@model CarWashBooking.ViewModels.NewCarWashViewModel
+
+@{
+    ViewData["Title"] = "AddCarWash";
+}
+
+<h2>AddCarWash</h2>
+
+<h4>CarWash</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-controller="Admin" asp-action="AddCarWash" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Adresse" class="control-label"></label>
+                <input asp-for="Adresse" class="form-control" />
+                <span asp-validation-for="Adresse" class="text-danger"></span>
+            </div>
+          
+            <div class="col-md-10">
+
+
+
+                <p>Tilføj billede:</p>
+                <input type="file" name="UploadFile" required accept="*.png">
+               
+            </div>
+             
+            <div class="form-group">
+                <input type="submit" value="Opret" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Tilbage</a>
+</div>
+

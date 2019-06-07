@@ -1,0 +1,46 @@
+﻿
+@model CarWashBooking.ViewModels.StatistikViewModel
+
+@{
+    ViewData["Title"] = "Statistik";
+}
+
+<h2>Statistik</h2>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/js/socket.js"></script>
+<script>
+    $(document).ready(function () {
+        connect('');
+        displayCurrentUsers();
+    });
+</script>
+<form  method="get">
+    <div id="currentUser">
+        Antal brugere på booking siden lige nu:
+    </div>
+
+    Fra dato:  <input type="date" id="FromDate" asp-for="FromDate" asp-action="Update" style="width:200px;" class="form-control" asp-format="{0:yyyy-MM-dd}" />
+    Til dato <input type="date" id="ToDate" asp-for="ToDate" asp-action="Update" style="width:200px;" class="form-control" asp-format="{0:yyyy-MM-dd}" />
+    <input type="submit" value=" Opdater" asp-action="Update" />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Bil vask</th>
+                <th>Antal</th>
+
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var result in Model.Result)
+            {
+                <tr>
+                    <td>@result.Key </td>
+                    <td>@result.Value</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+ </form>
+
+

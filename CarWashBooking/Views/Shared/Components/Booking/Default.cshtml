@@ -1,0 +1,23 @@
+﻿@using CarWashBooking.ViewModels
+@model BookingViewModel
+
+<div>
+    Dato : @Html.DisplayFor(Model => Model.DisplayDate)
+</div>
+<div>
+    Tid:@Html.DisplayFor(m => m.DisplayTime)
+</div>
+<div>
+    <img src="@Model.SelectedCarWash.Image " id="img@Model.ID" style="float:left; padding-right:25px;width:100px; " alt="">
+</div>
+<div>
+    @Html.DisplayNameFor(model => model.SelectedCarWash.Name):@Html.DisplayFor(model => model.SelectedCarWash.Name)
+</div>
+<div>
+    @Html.DisplayNameFor(model => model.SelectedCarWash.Adresse):@Html.DisplayFor(model => model.SelectedCarWash.Adresse)
+</div>
+
+
+
+
+

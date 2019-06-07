@@ -1,0 +1,19 @@
+﻿@using CarWashBooking.Models.DataModels
+@model CarWash
+
+<br />
+<div style="display:inline-block">
+    <div style="display: inline-block">
+        <h4>@Model.Name</h4>
+        <img src="@Model.Image" id="img@Model.ID" style="float:left; padding-right:25px;width:100px; " alt="">
+
+        <div>
+            @Html.DisplayNameFor(model => model.Name):@Html.DisplayFor(model => model.Name)
+        </div>
+        <div>
+            @Html.DisplayNameFor(model => model.Adresse):@Html.DisplayFor(model => model.Adresse)
+        </div>
+    </div>
+</div>
+<hr style="background-color:black;height:2px; " />
+

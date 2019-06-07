@@ -1,0 +1,13 @@
+﻿@model CarWashBooking.ViewModels.NewBookingViewModel
+
+@{
+    ViewData["Title"] = "Booking";
+}
+
+<h2>Booking</h2>
+@User.Identity.Name
+
+@await Component.InvokeAsync("Booking", @Model)
+
+<a asp-action="Index">Tilbage</a>
+

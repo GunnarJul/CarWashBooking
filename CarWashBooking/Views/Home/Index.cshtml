@@ -1,0 +1,32 @@
+﻿@model CarWashBooking.ViewModels.BookingListViewModel
+@{
+    ViewData["Title"] = "Hovedmenu";
+   }
+
+@if (User.Identity.IsAuthenticated)
+{
+    <div>
+        <p> Du er logget ind som @Model.UserName   </p>
+        <hr />
+        @if (Model.Bookings != null && Model.Bookings.Any())
+        {
+            <p>Dine reservationer</p>
+           
+            for (int index = 0; index < Model.Bookings.Count; index++)
+            {
+                @await Component.InvokeAsync("Booking", @Model.Bookings[index])
+            <hr />
+            }
+         
+        }
+    </div>
+
+
+}
+else
+{
+    <h3>
+        Velkommen. Login og book en tid.<br>
+    </h3>
+
+}
